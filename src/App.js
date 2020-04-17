@@ -25,9 +25,17 @@ const App = () => {
           hello
         </p>
         <button onClick={() => handleClick("classes")}>classes</button>
-        <button onClick={handleClick}>Features</button>
-        <button onClick={handleClick}>Monsters</button>
-        <button onClick={handleClick}>Specs</button>
+        <button onClick={() => handleClick("features")}>Features</button>
+        <button onClick={() => handleClick("monsters")}>Monsters</button>
+        <button onClick={() => handleClick("spells")}>Spells</button>
+          <div>
+          {result.map((el, i) => (
+            <div key={el.index + i} className="categories-container">
+              <h4>{el.name}</h4>
+            </div>
+          ))}
+          </div>
+        
     </div>
   );
 }
