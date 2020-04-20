@@ -10,3 +10,16 @@ export const dndApi = async (category) => {
     throw error;
   }
 }
+
+export const descriptionApi = async (category, option) => {
+  try{
+    let nocors= `https://cors-anywhere.herokuapp.com/`
+    const secondResponse = await fetch (
+      `${nocors}http://dnd5eapi.co/api/${category}/${option}`
+    );
+    const dataDescription = await secondResponse.json();
+    return dataDescription;
+  } catch(error){
+    throw error;
+  }
+}

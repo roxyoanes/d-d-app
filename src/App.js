@@ -1,5 +1,5 @@
 import React from "react";
-import { dndApi } from "./api";
+import { dndApi, descriptionApi } from "./api";
 import Description from "./Description";
 
 import "./App.css";
@@ -7,29 +7,38 @@ import "./App.css";
 const App = () => {
   const [toggle, setToggle] = React.useState(false);
   const [result, setResult] = React.useState([]);
-  const [toggleDescription, setToggleDescription] = React.useState(false);
+  const [description, setDescription] = React.useState(null);
+  const [category, setCategory] = React.useState("");
   const [error, setError] = React.useState(null);
 
-  const handleClick = (a) => {
-    dndApi(a).then((data) => {
+  const handleClick = (categoryParam) => {
+    dndApi(categoryParam).then((data) => {
       setResult(data.results);
-      console.log(data.results);
     });
-    setToggle(!toggle);
+    setCategory(categoryParam)
     console.log("clicked");
   };
 
-  const descriptionClick = () => {
-    setToggleDescription(!toggleDescription);
-  };
+  const displayDescription = (option) => {
+    descriptionApi(category, option.index).then((dataDescription) => {
+      setDescription(dataDescription);
+      console.log(dataDescription);
+    });
+    setToggle(!toggle);
+  }
+
+  const handleSwitch = () => {
+    setToggle(!toggle);
+
+  }
 
   if (error) {
     return <p>{error}</p>;
   }
   return (
     <div className="App">
-      {toggleDescription ? (
-        <Description descriptionClick={descriptionClick} />
+      {toggle ? (
+        <Description handleSwitch={handleSwitch} description={description} />
       ) : (
         <div>
           <p>hello</p>
@@ -40,7 +49,7 @@ const App = () => {
           <div>
             {result.map((el, i) => (
               <div key={el.index + i} className="categories-container">
-                <button onClick={descriptionClick}>{el.name}</button>
+                <button onClick={() => displayDescription(el)}>{el.name}</button>
               </div>
             ))}
           </div>

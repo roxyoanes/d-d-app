@@ -1,11 +1,12 @@
 import React from "react";
 
-const Description = ({descriptionClick}) => {
+const Description = ({handleSwitch, description}) => {
   return(
     <div>
       <p>Description</p>
-      <button onClick={descriptionClick}>switch</button>
+      <button onClick={handleSwitch}>switch</button>
     </div>
+
     
   )
 }
