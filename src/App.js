@@ -7,16 +7,15 @@ import "./App.css";
 const App = () => {
   const [toggle, setToggle] = React.useState(false);
   const [result, setResult] = React.useState([]);
-  const [description, setDescription] = React.useState(null);
+  const [description, setDescription] = React.useState([]);
   const [category, setCategory] = React.useState("");
   const [error, setError] = React.useState(null);
 
   const handleClick = (categoryParam) => {
     dndApi(categoryParam).then((data) => {
-      setResult(data.results);
+      setResult(data.results.slice(0,15));
     });
     setCategory(categoryParam)
-    console.log("clicked");
   };
 
   const displayDescription = (option) => {
