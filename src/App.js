@@ -13,9 +13,9 @@ const App = () => {
 
   const handleClick = (categoryParam) => {
     dndApi(categoryParam).then((data) => {
-      setResult(data.results.slice(0,15));
+      setResult(data.results.slice(0, 15));
     });
-    setCategory(categoryParam)
+    setCategory(categoryParam);
   };
 
   const displayDescription = (option) => {
@@ -24,12 +24,11 @@ const App = () => {
       console.log(dataDescription);
     });
     setToggle(!toggle);
-  }
+  };
 
   const handleSwitch = () => {
     setToggle(!toggle);
-
-  }
+  };
 
   if (error) {
     return <p>{error}</p>;
@@ -39,16 +38,17 @@ const App = () => {
       {toggle ? (
         <Description handleSwitch={handleSwitch} description={description} />
       ) : (
-        <div>
-          <p>hello</p>
-          <button onClick={() => handleClick("classes")}>classes</button>
-          <button onClick={() => handleClick("features")}>Features</button>
-          <button onClick={() => handleClick("monsters")}>Monsters</button>
-          <button onClick={() => handleClick("spells")}>Spells</button>
-          <div>
+        <div className="buttons-container">
+          <button className="btn-class" onClick={() => handleClick("classes")}>Classes</button>
+          <button className="btn-class" onClick={() => handleClick("features")}>Features</button>
+          <button className="btn-class" onClick={() => handleClick("monsters")}>Monsters</button>
+          <button className="btn-class" onClick={() => handleClick("spells")}>Spells</button>
+          <div className="list">
             {result.map((el, i) => (
               <div key={el.index + i} className="categories-container">
-                <button onClick={() => displayDescription(el)}>{el.name}</button>
+                <button className="category-btn" onClick={() => displayDescription(el)}>
+                  {el.name}
+                </button>
               </div>
             ))}
           </div>

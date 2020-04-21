@@ -2,11 +2,10 @@ import React from "react";
 
 const Description = ({ handleSwitch, description }) => {
     return (
-      <div>
-        <p>Description</p>
-        <button onClick={handleSwitch}>switch</button>
-        <h4>{description.name}</h4>
-        <p>{description.desc}</p>
+      <div className="description-container">
+        <h4 className="description-title">{description.name}</h4>
+        <p className="description">{description.desc}</p>
+        <button className="toggle-btn" onClick={handleSwitch}>Switch</button>
        </div>
     );
   
