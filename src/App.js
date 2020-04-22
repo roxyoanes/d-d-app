@@ -1,6 +1,7 @@
 import React from "react";
 import { dndApi, descriptionApi } from "./api";
 import Description from "./Description";
+import ListComponent from "./ListComponent";
 
 import "./App.css";
 
@@ -13,7 +14,7 @@ const App = () => {
 
   const handleClick = (categoryParam) => {
     dndApi(categoryParam).then((data) => {
-      setResult(data.results.slice(0, 15));
+      setResult(data.results);
     });
     setCategory(categoryParam);
   };
@@ -38,20 +39,14 @@ const App = () => {
       {toggle ? (
         <Description handleSwitch={handleSwitch} description={description} />
       ) : (
-        <div className="buttons-container">
-          <button className="btn-class" onClick={() => handleClick("classes")}>Classes</button>
-          <button className="btn-class" onClick={() => handleClick("features")}>Features</button>
-          <button className="btn-class" onClick={() => handleClick("monsters")}>Monsters</button>
-          <button className="btn-class" onClick={() => handleClick("spells")}>Spells</button>
-          <div className="list">
-            {result.map((el, i) => (
-              <div key={el.index + i} className="categories-container">
-                <button className="category-btn" onClick={() => displayDescription(el)}>
-                  {el.name}
-                </button>
-              </div>
-            ))}
-          </div>
+        <div className="list-container">
+          <div className="buttons-container">
+            <button className="btn-class" onClick={() => handleClick("classes")}>Classes</button>
+            <button className="btn-class" onClick={() => handleClick("features")}>Features</button>
+            <button className="btn-class" onClick={() => handleClick("monsters")}>Monsters</button>
+            <button className="btn-class" onClick={() => handleClick("spells")}>Spells</button>
+        </div>
+        <ListComponent result={result} displayDescription={displayDescription} />
         </div>
       )}
     </div>
